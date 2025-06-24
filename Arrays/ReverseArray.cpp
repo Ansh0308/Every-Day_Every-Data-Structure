@@ -16,15 +16,14 @@ void PrintArray(int array[],int n){
     }
     return;
 }
-void ReverseArray(int array[],int n){
-    for(int i=0;i<n/2;i++){
-        array[n-i-1]=array[i]*array[n-i-1];
-        array[i]=array[n-i-1]/array[i];
-        array[n-i-1]=array[n-i-1]/array[i];
-
+void ReverseArray(int array[], int n) {
+    for (int i = 0; i < n / 2; i++) {
+        int temp = array[i];
+        array[i] = array[n - i - 1];
+        array[n - i - 1] = temp;
     }
-    return;
 }
+
 int main(){
     int n;
     cin>>n;
