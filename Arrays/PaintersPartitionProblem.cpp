@@ -30,7 +30,7 @@ bool isValid(vector<int> &arr,int n,int m,int mid){
 }
 int PaintersAllocation(vector<int> &arr,int n,int m){
     
-    int st=0,end=accumulate(arr.begin(),arr.end(), 0);
+    int st=*max_element(arr.begin(), arr.end()),end=accumulate(arr.begin(),arr.end(), 0);
     int ans=INT_MAX;
     
     while(st<=end){
@@ -60,7 +60,7 @@ int main() {
 
     cout << "Plz enter the array:" << endl;
     val_array(array);
-    cout<<"The Min number of the pages is "<<PaintersAllocation(array,n,m)<<endl;
+    cout<<"The Min time req by the painters is "<<PaintersAllocation(array,n,m)<<endl;
 
 
 
