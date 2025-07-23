@@ -14,19 +14,18 @@ void print_array(vector<int> &nums){
     }
     cout<<endl;
 }
-void BubbleSort(vector<int> &nums){
+void SelectionSort(vector<int> &nums){
     int n=nums.size();
-    for(int i=0;i<n-1;i++){
-        int flag=0;
-        for(int j=0;j<n-1-i;j++){
-            if(nums[j]>nums[j+1]){
-                swap(nums[j],nums[j+1]);
-                flag=1;
+    int min_ele=nums[0];
+    for(int i=0;i<n;i++){
+        int min_ele=i;
+        for(int j=i+1;j<n;j++){
+            if(nums[j]<nums[min_ele]){
+                min_ele=j;
             }
-        }
-        if(flag==0)return;
+            }
+            swap(nums[i],nums[min_ele]);
     }
-    return ;
 }
 
 
@@ -39,7 +38,7 @@ int main() {
 
     cout << "Plz enter the array:" << endl;
     val_array(array);
-    BubbleSort(array);
+    SelectionSort(array);
     cout<<"The Sorted array  is "<<endl;
     
     print_array(array);
