@@ -38,6 +38,13 @@ using namespace std;
 //     }
 //     return UniquePrime.size();
 // }
+#include <iostream>
+#include <vector>
+#include <set>
+#include <climits>
+using namespace std;
+
+// Sieve and prefix count of primes
 vector<int> PrefixcountPrimes(int n) {
     vector<int> ans(n + 1, 0);
     if (n < 2) return ans;
@@ -58,10 +65,10 @@ vector<int> PrefixcountPrimes(int n) {
     return ans;
 }
 
-
-int DistinctPrimesInRanges(vector<vector<int>> &ranges) {
+// Calculates count of distinct primes in the provided ranges
+int DistinctPrimesInRanges(const vector<vector<int>>& ranges) {
     int maxRange = INT_MIN;
-    for (auto &row : ranges)
+    for (const auto& row : ranges)
         maxRange = max(maxRange, row[1]);
 
     vector<int> prefixPrimes = PrefixcountPrimes(maxRange);
@@ -69,22 +76,32 @@ int DistinctPrimesInRanges(vector<vector<int>> &ranges) {
 
     for (int p = 2; p <= maxRange; p++) {
         if (prefixPrimes[p] > prefixPrimes[p - 1]) {  // p is prime
-            for (auto &row : ranges) {
+            for (const auto& row : ranges) {
                 if (p >= row[0] && p <= row[1]) {
                     uniquePrimes.insert(p);
-                    break;  // no need to check other ranges
+                    break;
                 }
             }
         }
     }
-
     return uniquePrimes.size();
 }
 
+// New function: reads number of ranges and range bounds, returns distinct primes count
+int ReadRangesAndReturnDistinctPrimes() {
+    int rangeCount;
+    
+    cin >> rangeCount;
+    vector<vector<int>> ranges(rangeCount, vector<int>(2));
+    
+    for (int i = 0; i < rangeCount; i++) {
+        cin >> ranges[i][0] >> ranges[i][1];
+    }
+    return DistinctPrimesInRanges(ranges);
+}
 
 int main() {
-    vector<vector<int>> ranges = {{1, 5}, {2, 6},{6,9}};
-    int result = DistinctPrimesInRanges(ranges);
+    int result = ReadRangesAndReturnDistinctPrimes();
     cout << "Total DISTINCT prime numbers in all ranges: " << result << endl;
     return 0;
 }
