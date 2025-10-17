@@ -71,7 +71,10 @@ const double EPS = 1e-9;
 // -------------------------------
 // 🔹 Main Logic Example
 // -------------------------------
-
+//declaring and defining the Sum of N numbers  function
+int sum_of_n(int n){
+    return (n==0)?0:n+sum_of_n(n-1);
+}   
 void solve() {
     // // Example 1: Using typedefs and input helpers
     // cout << "Enter number of elements: ";
@@ -119,7 +122,11 @@ void solve() {
     // sort(all(names));
     // cout << "Sorted names: ";
     // print_vec(names);
-
+    int n;
+    cout<<"Enter a number to find sum of first N natural numbers: ";
+    cin>>n;
+    cout<<"Sum of first "<<n<<" natural numbers is "<<sum_of_n(n)<<endl;
+    
 }
 
 // -------------------------------
