@@ -91,12 +91,12 @@ int Recursive_Binary_Search(vi &arr,int tar,int left,int right) {
 
 void solve() {
     // // Example 1: Using typedefs and input helpers
-    cout << "Enter number of elements: ";
+    cout << "Enter number of elements sorted: ";
     int n; cin >> n;
     vi arr = input_vi(n);
 
     // Example 2: Using macros and algorithms
-    sort(all(arr)); // uses all()
+    // sort(all(arr)); // uses all()
     cout << "Enter target to search: ";
     int target; cin >> target;
     int result = Recursive_Binary_Search(arr, target, 0, n - 1);
