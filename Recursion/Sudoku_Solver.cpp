@@ -6,6 +6,8 @@ using namespace std;
 // -------------------------------
 typedef long long ll;
 typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<vector<char>> vvc;
 typedef vector<ll> vll;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
@@ -71,6 +73,59 @@ const double EPS = 1e-9;
 // -------------------------------
 // 🔹 Main Logic Example
 // -------------------------------
+bool is_safe(vvc& board, int row, int col, char num) {
+    for(int x = 0; x < 9; x++) {
+        if(board[row][x] == num || board[x][col] == num)
+            return false;
+    }
+    int s_row=(row/3)*3, s_col=(col/3)*3;
+    for(int i=s_row;i<s_row+3;i++){
+        for(int j=s_col;j<s_col+3;j++){
+            if(board[i][j]==num) return false;
+        }
+    }
+    return true;
+}
+bool Soduku_Solver(vvc& board,int row,int col) {
+    // Implementation of Sudoku Solver using Recursion would go here.
+    // This is a placeholder function to demonstrate structure.
+    if(row == 9) {
+        // // Print the solved board
+        // for(const auto& r : board) {
+        //     for(const auto& val : r) {
+        //         cout << val << " ";
+        //     }
+        //     cout << endl;
+        // }
+        return true;
+    }
+    if(col==9){
+        
+        return Soduku_Solver(board,row+1,0);
+    }
+    if(board[row][col]!='.'){
+        
+        return Soduku_Solver(board,row,col+1);
+    }
+    for(int num=1;num<=9;num++){
+        // Check if num can be placed at board[row][col]
+        if(is_safe(board,row,col,num+'0')){
+            board[row][col]=num+'0';
+            if(Soduku_Solver(board,row,col+1)) return true;
+            board[row][col]='.'; // backtrack
+        }
+    }
+    return false;
+}
+void Soduku_Solver_Init(vvc& board) {
+    Soduku_Solver(board,0,0);
+    for(const auto& r : board) {
+        for(const auto& val : r) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+}
 
 void solve() {
     // // Example 1: Using typedefs and input helpers
