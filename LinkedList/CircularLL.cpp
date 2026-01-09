@@ -144,7 +144,7 @@ class CircularLinkedList{
         }
         temp->next=head;
         delete tail;
-        tail=temp;
+        tail=temp; 
     }
 };
 class LinkedList{
