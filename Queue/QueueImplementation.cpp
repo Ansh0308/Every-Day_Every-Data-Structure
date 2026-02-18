@@ -127,6 +127,17 @@ void solve() {
     q.pop();
     q.pop();
     cout << (q.empty() ? "Queue is empty" : "Queue is not empty") << endl; // Output: Queue is empty
+
+    //STL Queue
+    queue<int> stlQueue;
+    stlQueue.push(10);
+    stlQueue.push(20);
+    stlQueue.push(30);
+    while(!stlQueue.empty()){
+        cout << stlQueue.front() << " ";
+        stlQueue.pop();
+    }
+    cout << endl;
     
 }
 
