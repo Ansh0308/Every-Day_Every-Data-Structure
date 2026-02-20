@@ -114,44 +114,58 @@ class Queue{
         return head == NULL;
     }
 };
-
+class CircularQueue{
+    public:
+    int *arr;
+    int front=0;
+    int rear=-1;
+    int size,cap;
+    CircularQueue(int cap){
+        size=0;
+        this->cap=cap;
+        arr=new int[cap];
+    } 
+    void push(int val){
+        if(size==cap){
+            cout<<"Queue is full"<<endl;
+            return;
+        }
+        rear=(rear+1)%cap;
+        arr[rear]=val;
+        size++;
+    }
+    void pop(){
+        if(size==0){
+            cout<<"Queue is empty"<<endl;
+            return;
+        }
+        front=(front+1)%cap;
+        size--;
+    }
+    int frontEle(){
+        if(size==0){
+            cout<<"Queue is empty"<<endl;
+            return -1;
+        }
+        return arr[front];
+    }
+    bool empty(){
+        return size==0;
+    }
+};
 
 void solve() {
-    Queue q;
+    CircularQueue q(3);
     q.push(10);
     q.push(20);
     q.push(30);
-    cout << q.front() << endl; // Output: 10
+    cout << q.frontEle() << endl; // Output: 10
     q.pop();
-    cout << q.front() << endl; // Output: 20
+    cout << q.frontEle() << endl; // Output: 20
     cout << (q.empty() ? "Queue is empty" : "Queue is not empty") << endl; // Output: Queue is not empty
     q.pop();
     q.pop();
     cout << (q.empty() ? "Queue is empty" : "Queue is not empty") << endl; // Output: Queue is empty
-
-    //STL Queue
-    queue<int> stlQueue;
-    stlQueue.push(10);
-    stlQueue.push(20);
-    stlQueue.push(30);
-    while(!stlQueue.empty()){
-        cout << stlQueue.front() << " ";
-        stlQueue.pop();
-    }
-    cout << endl;
-    //STL Deque
-    cout << "Using STL Deque:" << endl;
-    deque<int> stlDeque;
-    stlDeque.push_back(10);
-    stlDeque.push_back(20);
-    stlDeque.push_back(30);
-    stlDeque.push_front(5);
-    cout << "Front: " << stlDeque.front() << endl; // Output: 5
-    cout << "Back: " << stlDeque.back() << endl; // Output: 30
-    while(!stlDeque.empty()){
-        cout << stlDeque.front() << " ";
-        stlDeque.pop_front();   }
-        cout << endl;
     
 }
 
