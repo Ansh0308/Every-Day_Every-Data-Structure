@@ -126,6 +126,18 @@ bool isSameTree(Node* p, Node* q) {
     if(p->data!=q->data)return false;
     return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
 }
+bool isSubtree(Node* root, Node* subRoot) {
+        if(root==nullptr && subRoot==nullptr)return true;
+        if(root==nullptr || subRoot==nullptr)return false;
+        if(root->data==subRoot->data){
+            bool temp=isSameTree(root,subRoot);
+             if(temp)return true;
+        }
+       
+        return isSubtree(root->left,subRoot)||isSubtree(root->right,subRoot);
+
+        
+    }
 void solve() {
     vi preorder={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     int idx=-1;
