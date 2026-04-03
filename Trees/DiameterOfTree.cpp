@@ -126,7 +126,31 @@ bool isSameTree(Node* p, Node* q) {
     if(p->data!=q->data)return false;
     return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
 }
+bool isSubtree(Node* root, Node* subRoot) {
+        if(root==nullptr && subRoot==nullptr)return true;
+        if(root==nullptr || subRoot==nullptr)return false;
+        if(root->data==subRoot->data){
+            bool temp=isSameTree(root,subRoot);
+             if(temp)return true;
+        }
+       
+        return isSubtree(root->left,subRoot)||isSubtree(root->right,subRoot);
 
+        
+    }
+    int height(Node* root){
+        if(root==nullptr)return 0;
+        return 1+max(height(root->left),height(root->right));
+    }
+    int diameterOfBinaryTree(Node* root) {
+        if(root==nullptr)return 0;
+        int h1=height(root->left);
+        int h2=height(root->right);
+        int ans1=h1+h2;
+        int ans2=(h1>h2)?diameterOfBinaryTree(root->left):diameterOfBinaryTree(root->right);
+        return max(ans1,ans2);
+        
+    }
 void solve() {
     vi preorder={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     int idx=-1;
@@ -135,20 +159,7 @@ void solve() {
     cout<<"Preorder Traversal: ";
     Preorder(root);
 
-    cout<<"Inorder Traversal: ";
-    Inorder(root);
-
-    cout<<"Postorder Traversal: ";
-    Postorder(root);
-
-    cout<<"Level Order Traversal: ";
-    LevelOrder(root);
-
-    // Example of using isSameTree function
-    vi preorder2={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
-    int idx2=-1;
-    Node* root2=BuildTree(preorder2,idx2);
-    cout << "Are the two trees the same? " << (isSameTree(root, root2) ? "Yes" : "No") << endl;
+    cout<<"Diameter of the tree: "<<diameterOfBinaryTree(root)<<endl;
 }
 
 // -------------------------------
